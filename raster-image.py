@@ -1,9 +1,9 @@
 ######################################
-#         Raster Starter Code        #
+#   Eliminating Digital Noise Code   #
 #                                    #
-#           Project STEM             #
+#           Project STEM CSP         #
 #                                    #
-#              1/4/24                #
+#              12/31/23              #
 #                                    #
 ######################################
 
@@ -19,7 +19,7 @@ if os.path.exists("newImage.jpg"):
 print("\n\n")
 
 # Opens image - Local File in repl.it
-img = Image.open('pink.jpg')
+img = Image.open('iron.jpg')
 
 # Rescale image size down, if needed
 width = img.width
@@ -36,7 +36,7 @@ if scale != 0:
 ########################
 #        Filter        #
 ########################
-def newFilter():
+def newFilter(image):
   # Starts at the first pixel in the image
   location = 0
   # Continues until it has looped through all pixels
@@ -44,15 +44,14 @@ def newFilter():
     # Gets the current color of the pixel at location
     p = new_pixels[location]
     # Splits color into red, green and blue components
-    r = 0#p[0]
+    r = p[0]
     g = p[1]
-    b = 0#p[2]
+    b = p[2]
     # Perform pixel manipulation and stores results
     # to a new red, green and blue components
     newr = r
-    newg = g * 10
+    newg = g
     newb = b
-
     # Assign new red, green and blue components to pixel
     # at that specific location
     new_pixels[location] = (newr, newg, newb)
@@ -60,7 +59,7 @@ def newFilter():
     location = location + 1
   # Creates a new image, the same size as the original 
   # using RGB value format
-  newImage = Image.new("RGB", img.size)
+  newImage = Image.new("RGB", image.size)
   # Assigns the pixel values to newImage
   newImage.putdata(new_pixels)
   # Saves the new image file
@@ -76,4 +75,4 @@ for p in pixels:
   new_pixels.append(p)
 
 # Calls the newFilter function to create the image
-newFilter()
+newFilter(img)

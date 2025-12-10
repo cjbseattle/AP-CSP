@@ -1,15 +1,16 @@
 ######################################
-#   Eliminating Digital Noise Code   #
+#         Raster Starter Code        #
 #                                    #
-#           Project STEM CSP         #
+#           Project STEM             #
 #                                    #
-#              12/31/23              #
+#              1/4/24                #
 #                                    #
 ######################################
 
 # Importing PIL.Image library and os library
 from PIL import Image 
 import os
+import random
 
 # Deletes old created images if they exist
 if os.path.exists("newImage.jpg"):
@@ -19,7 +20,7 @@ if os.path.exists("newImage.jpg"):
 print("\n\n")
 
 # Opens image - Local File in repl.it
-img = Image.open('iron.jpg')
+img = Image.open('image.jpg')
 
 # Rescale image size down, if needed
 width = img.width
@@ -36,13 +37,30 @@ if scale != 0:
 ########################
 #        Filter        #
 ########################
-value = int(input("Enter an integer from 0 - 255: "))
+def newFilter():
+  change = input("How much do you want your image to change: low, medium or high? ")
 
-def newFilter(image):
   # Starts at the first pixel in the image
   location = 0
   # Continues until it has looped through all pixels
   while location < len(new_pixels):
+    if change == "low":
+      rand = random.randint(1,10)
+    elif change == "medium":
+      rand = random.randint(11,20)
+    elif change == "high":
+      rand = random.randint(21,30)
+    else:
+      print("You did not choose a correct option.")
+      rand = 0
+    
+    if location < 30:
+      newp = new_pixels[location + rand]
+    else:
+      newp = new_pixels[location - rand]
+    nr = newp[0]
+    ng = newp[1]
+    nb = newp[2]
     # Gets the current color of the pixel at location
     p = new_pixels[location]
     # Splits color into red, green and blue components
@@ -51,9 +69,9 @@ def newFilter(image):
     b = p[2]
     # Perform pixel manipulation and stores results
     # to a new red, green and blue components
-    newr = r + value
-    newg = g + value
-    newb = b + value
+    newr = int((r + nr) / 2)
+    newg = int((g + ng) / 2)
+    newb = int((b + nb) / 2)
     # Assign new red, green and blue components to pixel
     # at that specific location
     new_pixels[location] = (newr, newg, newb)
@@ -61,7 +79,7 @@ def newFilter(image):
     location = location + 1
   # Creates a new image, the same size as the original 
   # using RGB value format
-  newImage = Image.new("RGB", image.size)
+  newImage = Image.new("RGB", img.size)
   # Assigns the pixel values to newImage
   newImage.putdata(new_pixels)
   # Saves the new image file
@@ -77,4 +95,4 @@ for p in pixels:
   new_pixels.append(p)
 
 # Calls the newFilter function to create the image
-newFilter(img)
+newFilter()

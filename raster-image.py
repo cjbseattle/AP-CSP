@@ -36,6 +36,8 @@ if scale != 0:
 ########################
 #        Filter        #
 ########################
+value = int(input("Enter an integer from 0 - 255: "))
+
 def newFilter(image):
   # Starts at the first pixel in the image
   location = 0
@@ -49,9 +51,9 @@ def newFilter(image):
     b = p[2]
     # Perform pixel manipulation and stores results
     # to a new red, green and blue components
-    newr = r
-    newg = g
-    newb = b
+    newr = r + value
+    newg = g + value
+    newb = b + value
     # Assign new red, green and blue components to pixel
     # at that specific location
     new_pixels[location] = (newr, newg, newb)

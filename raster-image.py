@@ -45,11 +45,11 @@ def newFilter():
     p = new_pixels[location]
     # Splits color into red, green and blue components
     r = p[0]
-    g = p[1]
-    b = p[2]
+    g = 0
+    b = 0
     # Perform pixel manipulation and stores results
     # to a new red, green and blue components
-    newr = r
+    newr = r * 10
     newg = g
     newb = b
     # Assign new red, green and blue components to pixel

@@ -19,7 +19,7 @@ if os.path.exists("newImage.jpg"):
 print("\n\n")
 
 # Opens image - Local File in repl.it
-img = Image.open('image.jpg')
+img = Image.open('copper.jpg')
 
 # Rescale image size down, if needed
 width = img.width
@@ -44,14 +44,14 @@ def newFilter():
     # Gets the current color of the pixel at location
     p = new_pixels[location]
     # Splits color into red, green and blue components
-    r = p[0]
-    g = 0
-    b = 0
+    r = 0#p[0]
+    g = p[1]
+    b = p[2]
     # Perform pixel manipulation and stores results
     # to a new red, green and blue components
-    newr = r * 10
-    newg = g
-    newb = b
+    newr = r
+    newg = g * 10
+    newb = b * 10
     # Assign new red, green and blue components to pixel
     # at that specific location
     new_pixels[location] = (newr, newg, newb)

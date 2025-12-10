@@ -1,16 +1,15 @@
 ######################################
-#         Raster Starter Code        #
+#   Eliminating Digital Noise Code   #
 #                                    #
-#           Project STEM             #
+#           Project STEM CSP         #
 #                                    #
-#              1/4/24                #
+#              12/31/23              #
 #                                    #
 ######################################
 
 # Importing PIL.Image library and os library
 from PIL import Image 
 import os
-import random
 
 # Deletes old created images if they exist
 if os.path.exists("newImage.jpg"):
@@ -37,53 +36,50 @@ if scale != 0:
 ########################
 #        Filter        #
 ########################
-def newFilter():
-  change = input("How much do you want your image to change: low, medium or high? ")
-
+def newFilter(image):
   # Starts at the first pixel in the image
   location = 0
+  changeColor = 0
   # Continues until it has looped through all pixels
-  while location < len(new_pixels):
-    if change == "low":
-      rand = random.randint(1,10)
-    elif change == "medium":
-      rand = random.randint(11,20)
-    elif change == "high":
-      rand = random.randint(21,30)
-    else:
-      print("You did not choose a correct option.")
-      rand = 0
-    
-    if location < 30:
-      newp = new_pixels[location + rand]
-    else:
-      newp = new_pixels[location - rand]
-    nr = newp[0]
-    ng = newp[1]
-    nb = newp[2]
-    # Gets the current color of the pixel at location
-    p = new_pixels[location]
-    # Splits color into red, green and blue components
-    r = p[0]
-    g = p[1]
-    b = p[2]
-    # Perform pixel manipulation and stores results
-    # to a new red, green and blue components
-    newr = int((r + nr) / 2)
-    newg = int((g + ng) / 2)
-    newb = int((b + nb) / 2)
-    # Assign new red, green and blue components to pixel
-    # at that specific location
-    new_pixels[location] = (newr, newg, newb)
-    # Changes the location to the next pixel in array
-    location = location + 1
-  # Creates a new image, the same size as the original 
-  # using RGB value format
-  newImage = Image.new("RGB", img.size)
-  # Assigns the pixel values to newImage
-  newImage.putdata(new_pixels)
-  # Saves the new image file
-  newImage.save("newImage.jpg")
+  while changeColor < 2:
+    while location < len(new_pixels):
+      # Gets the current color of the pixel at location
+      p = new_pixels[location]
+      # Splits color into red, green and blue components
+      r = p[0]
+      g = 0#p[1]
+      b = p[2]
+      if changeColor == 0:
+        r = 0
+      elif changeColor == 1:
+        b = 0
+
+      if changeColor == 0 and location < 30:
+        newp = new_pixels[location + 30]
+      elif changeColor == 1:
+        newp = new_pixels[location - 30]
+      nr = newp[0]
+      ng = newp[1]
+      nb = newp[2]
+      # Perform pixel manipulation and stores results
+      # to a new red, green and blue components
+      newr = int((r + nr) / 2)
+      newg = int((g + ng) / 2)
+      newb = int((b + nb) / 2)
+      # Assign new red, green and blue components to pixel
+      # at that specific location
+      new_pixels[location] = (newr, newg, newb)
+      # Changes the location to the next pixel in array
+      location = location + 1
+    # Creates a new image, the same size as the original 
+    # using RGB value format
+    newImage = Image.new("RGB", image.size)
+    # Assigns the pixel values to newImage
+    newImage.putdata(new_pixels)
+    # Saves the new image file
+    newImage.save("newImage.jpg")
+  
+  changeColor += 1
 
 # Creates an ImageCore Object from original image
 pixels = img.getdata()
@@ -95,4 +91,4 @@ for p in pixels:
   new_pixels.append(p)
 
 # Calls the newFilter function to create the image
-newFilter()
+newFilter(img)
